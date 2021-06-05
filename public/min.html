@@ -1,0 +1,61 @@
+<!doctype html>
+
+<head>
+
+
+    
+   
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.js" integrity="sha512-a5hlZKgpC1LVAuKgVeXdP0D9Yfacj0hLtNdzx9zFMkIWRrQyO37KtIPiqArGmVuaBYu3ON6Vt0N3+G/JaLXQYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+
+
+
+<script type="text/javascript">
+let video ;
+let image;
+let socket
+
+
+function setup() {
+    noCanvas()
+    socket = io.connect('http://localhost:3000');
+    // socket.on('photo',eve)
+    // function eve(data){
+    //     console.log('comeing data')
+    // }
+    video = createCapture(VIDEO)
+    video.size(320,240)
+    video.loadPixels()
+    video.hide();
+   
+ 
+  
+
+}
+function draw(){
+    
+
+    video.loadPixels()
+    image = video.canvas.toDataURL("image/jpeg")
+    data = {
+        im : image
+    }
+    // console.log(image)
+    socket.emit('photo',data)
+}
+
+
+
+
+
+</script>
+
+
+
+
+</html>
